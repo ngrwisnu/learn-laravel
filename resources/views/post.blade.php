@@ -3,7 +3,8 @@
 @section('content')
     <article>
         <h2>{{ $post->title }}</h2>
-        <h6>{{ $post->author }}</h6>
+        <h6> By <strong>Ngr</strong></h6>
+        <p>category: <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a></p>
         {!! $post->body !!}
     </article>
 
