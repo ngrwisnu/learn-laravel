@@ -9,7 +9,7 @@ class PostController extends Controller
     public function index() {
         return view('blog', [
             "title" => "Blog",
-            "posts"=> Post::all()
+            "posts"=> Post::with(['category', 'user'])->get()
         ]);
     }
 
