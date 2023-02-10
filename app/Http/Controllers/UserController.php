@@ -9,9 +9,10 @@ class UserController extends Controller
     public function posts(User $user)
     {
         return view('authors_posts', [
+            'setActiveNav' => 'Blog',
             'title' => "User's Posts",
-            'heading' => $user,
-            'posts' => $user->posts->load('category'),
+            'user' => $user,
+            'posts' => $user->posts,
         ]);
     }
 }

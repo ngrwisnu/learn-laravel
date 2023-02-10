@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home', [
+        "setActiveNav" => "Home",
         "title" => "Home"
     ]);
 });
@@ -26,6 +27,7 @@ Route::get('/', function () {
 
 Route::get('/about', function() {
     return view('about', [
+        "setActiveNav" => "About",
         "title" => "About"
     ]);
 });

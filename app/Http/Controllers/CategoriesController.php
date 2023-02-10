@@ -8,7 +8,8 @@ class CategoriesController extends Controller
     public function get_all()
     {
         return view('categories', [
-            'title' => 'Post Categories',
+            'setActiveNav' => 'Categories',
+            'title' => 'Categories',
             'categories' => Category::all(),
         ]);
     }
@@ -16,9 +17,10 @@ class CategoriesController extends Controller
     public function show(Category $category)
     {
         return view('category', [
+            'setActiveNav' => 'Categories',
             'title' => $category->name,
             'posts' => $category->posts,
-            'category' => $category->name,
+            'category' => $category,
         ]);
     }
 }

@@ -45,6 +45,16 @@ class DatabaseSeeder extends Seeder
             'slug' => 'product-design'
         ]);
 
+        Category::create([
+            'name' => 'Sport',
+            'slug' => 'sport'
+        ]);
+
+        Category::create([
+            'name' => 'Astronomy',
+            'slug' => 'astronomy'
+        ]);
+
         Post::factory(20)->create();
 
         // ! manual Post seeder

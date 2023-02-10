@@ -8,13 +8,15 @@ class PostController extends Controller
 {
     public function index() {
         return view('blog', [
+            'setActiveNav' => 'Blog',
             "title" => "Blog",
-            "posts"=> Post::with(['category', 'user'])->get()
+            "posts"=> Post::all()
         ]);
     }
 
     public function show(Post $post) {
         return view('post', [
+            'setActiveNav' => 'Blog',
             "title"=>"Post",
             "post"=> $post,
         ]);
