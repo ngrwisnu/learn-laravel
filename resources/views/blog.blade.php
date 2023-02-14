@@ -1,6 +1,18 @@
 @extends('layouts.main')
 
 @section('content')
+    <h1 class="text-center">All Posts</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form action="/blog">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Enter the keywords" name="search" value="{{ request('search') }}">
+                    <button class="btn btn-outline-secondary" type="submit" style="background-color: #5b21b6; color: white;">Search Posts</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     @if ($posts->count())
 
@@ -17,14 +29,6 @@
             </div>
         </div>
     </article>
-
-    @else
-
-    <p class="text-center">No posts found!</p>
-
-    @endif
-
-    
 
     <div class="container">
         <div class="row">
@@ -52,6 +56,17 @@
             </div>
             @endforeach
         </div>
+    </div>
+
+    @else
+
+    <p class="text-center">No posts found!</p>
+
+    @endif
+
+    <div class="d-flex justify-content-center">
+        {{ $posts->links() }}
+
     </div>
         
 @endsection

@@ -21,4 +21,25 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        // ! using IF
+        // if(isset($filters['search-input']) ? $filters['search-input'] : false) {
+        //     return $query->where('title', 'like', '%' . $filters['search-input'] . '%')
+        //                 ->orWhere('body', 'like', '%' . $filters['search-input'] . '%');
+        // }
+
+        // ! using WHEN
+        $query->when($filters['search'] ?? false, function($query, $search) {
+            return $query->where('title', 'like', '%' .$search . '%')
+                        ->orWhere('body', 'like', '%' .$search . '%');
+        });
+
+        // $query->when($filters['category'] ?? false, function($query, $category) {
+        //     return $query->whereHas('category', function($query) use ($category) {
+        //         $query->where('slug', $category);
+        //     });
+        // });
+    }
 }
