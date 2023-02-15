@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\CategoriesController;
 
 
 /*
@@ -41,3 +43,7 @@ Route::get('/categories', [CategoriesController::class, 'get_all']);
 Route::get('/categories/{category:slug}', [CategoriesController::class, 'show']);
 
 Route::get('/author/{user:username}', [UserController::class, 'posts']);
+
+Route::get('/login', [LoginController::class, 'index']);
+
+Route::get('/register', [RegisterController::class, 'index']);
