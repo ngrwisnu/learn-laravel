@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -44,7 +45,12 @@ Route::get('/categories/{category:slug}', [CategoriesController::class, 'show'])
 
 Route::get('/author/{user:username}', [UserController::class, 'posts']);
 
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'auth']);
 
-Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
