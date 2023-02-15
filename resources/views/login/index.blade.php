@@ -4,6 +4,11 @@
     
     <div class="row justify-content-center">
         <div class="col-lg-4">
+            @if (session()->has('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+            @endif
             <main class="form-signin w-100 m-auto">
                 <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
                 <form>
