@@ -11,7 +11,11 @@
             <article class="col-md-4 mb-3">
                 <div class="card overflow-hidden" style="height: 430px">
                     <a href="/posts/{{ $post->slug }}" class="position-absolute" style="width: 100%; height: 100%; background-color: rgba(0,0,0,0)"></a>
+                    @if ($post->image) 
+                    <img src="{{ asset('storage/' . $post->image) }}" style="width: 100%" class="card-img-top" alt="{{ $post->category->name }}">
+                    @else
                     <img src="https://source.unsplash.com/800x400?{{ $post->category->name }}" class="card-img-top" alt{{ $post->category->name }}">
+                    @endif
                     <div class="card-body overflow-hidden">
                       <h5 class="card-title">{{ $post->title }}</h5>
                       <small>posted {{ $post->created_at->diffForHumans() }}</small><br/>

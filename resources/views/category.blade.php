@@ -7,9 +7,13 @@
         <div class="row">
             @foreach ($posts as $post)
             <article class="col-md-4 mb-3">
-                <div class="card" style="height: 430px">
+                <div class="card overflow-hidden" style="height: 430px">
                     <a href="/posts/{{ $post->slug }}" class="position-absolute" style="width: 100%; height: 100%; background-color: rgba(0,0,0,0)"></a>
+                    @if ($post->image) 
+                    <img src="{{ asset('storage/' . $post->image) }}" style="width: 100%" class="" alt="{{ $post->category->name }}">
+                    @else
                     <img src="https://source.unsplash.com/800x400?{{ $category->title }}" class="card-img-top" alt{{ $category->title }}">
+                    @endif
                     <div class="card-body overflow-hidden">
                       <h5 class="card-title">{{ $post->title }}</h5>
                       <small>Written by: <strong style="font-size: 16px;">{{ $post->user->name }}</strong></small>

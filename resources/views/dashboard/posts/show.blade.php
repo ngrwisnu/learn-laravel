@@ -2,7 +2,13 @@
 
 @section('container')
 <article class="container my-3">
+    @if ($post->image) 
+    <div style="width: 1200px; height: 400px; overflow: hidden;">
+        <img src="{{ asset('storage/' . $post->image) }}" style="width: 100%" class="mb-3" alt="{{ $post->category->name }}">
+    </div>
+    @else
     <img src="https://source.unsplash.com/1200x400?{{ $post->category->name }}" style="width: 100%" class="mb-3" alt="{{ $post->category->name }}">
+    @endif
     <div class="row">
         <div class="col-8 mx-auto">
             <h2>{{ $post->title }}</h2>

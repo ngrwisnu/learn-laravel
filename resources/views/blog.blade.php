@@ -18,7 +18,13 @@
 
     <article class="mb-4">
         <div class="card">
-            <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}" class="card-img-top" alt="...">
+            @if ($posts[0]->image) 
+            <div style="width: 100%; height: 400px; overflow: hidden;">
+                <img src="{{ asset('storage/' . $posts[0]->image) }}" style="width: 100%" class="card-img-top mb-3" alt="{{ $posts[0]->category->name }}">
+            </div>
+            @else
+            <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->name }}" class="card-img-top" alt="{{ $posts[0]->category->name }}">
+            @endif
             <div class="card-body">
                 <h5 class="card-title">{{ $posts[0]->title }}</h5>
                 <p class="card-text">
@@ -38,7 +44,11 @@
                         <div class="card mb-3 overflow-hidden">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="https://source.unsplash.com/400x400?{{ $post->category->name }}" class="img-fluid" alt="..." style="height: 100%">
+                                    @if ($post->image) 
+                                    <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid" style="height: 100%" alt="{{ $post->category->name }}">
+                                    @else
+                                    <img src="https://source.unsplash.com/400x400?{{ $post->category->name }}" class="img-fluid" alt="{{ $post->category->name }}" style="height: 100%">
+                                    @endif
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">

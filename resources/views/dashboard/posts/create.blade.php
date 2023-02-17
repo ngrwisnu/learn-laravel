@@ -6,7 +6,7 @@
 </div>
 
 <div class="col-lg-6">
-    <form action="/dashboard/posts" method="POST" class="mb-5" autocomplete="on">
+    <form action="/dashboard/posts" method="POST" class="mb-5" autocomplete="on" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
@@ -33,6 +33,13 @@
               @endif
             @endforeach
           </select>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Choose Image</label>
+          <input class="form-control @error('slug') is-invalid @enderror" type="file" id="image" name="image">
+          @error('image')
+            <small class="invalid-feedback">{{ $message }}</small>
+          @enderror
         </div>
         <div class="mb-3">
           <label for="editor" class="form-label">Post Content</label>
