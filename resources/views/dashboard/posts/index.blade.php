@@ -5,6 +5,13 @@
     <h1 class="h2">POSTS</h1>
 </div>
 
+@if (session()->has('success'))
+<div class="alert alert-success d-flex justify-content-between" role="alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <div class="table-responsive col-lg-10">
     <a href="/dashboard/posts/create" class="btn btn-primary mb-3"><span data-feather="plus"></span> Create a new post</a>
     <table class="table table-striped table-sm">

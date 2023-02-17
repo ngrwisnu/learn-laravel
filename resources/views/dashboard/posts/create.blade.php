@@ -6,27 +6,40 @@
 </div>
 
 <div class="col-lg-6">
-    <form action="/dashboard/posts" method="POST">
+    <form action="/dashboard/posts" method="POST" autocomplete="on">
         @csrf
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
-          <input name="title" type="text" class="form-control" id="title">
+          <input name="title" type="text" value="{{ old('title') }}" class="form-control @error('title') is-invalid @enderror" id="title" required autofocus>
+          @error('title')
+            <small class="invalid-feedback">{{ $message }}</small>
+          @enderror
         </div>
         <div class="mb-3">
           <label for="slug" class="form-label">Slug</label>
-          <input name="slug" type="text" class="form-control" id="slug">
+          <input name="slug" type="text" value="{{ old('slug') }}" class="form-control @error('slug') is-invalid @enderror" id="slug" required>
+          @error('slug')
+            <small class="invalid-feedback">{{ $message }}</small>
+          @enderror
         </div>
         <div class="mb-3">
           <label for="category" class="form-label">Category</label>
           <select class="form-select" name="category_id" id="category">
             @foreach ($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
+              @if (old('category_id') == $category->id)
+              <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+              @else
+              <option value="{{ $category->id }}">{{ $category->name }}</option>
+              @endif
             @endforeach
           </select>
         </div>
         <div class="mb-3">
           <label for="editor" class="form-label">Post Content</label>
-          <textarea name="body" id="editor" cols="30" rows="10"></textarea>
+          <textarea name="body" id="editor" cols="30" rows="10" class="@error('body') is-invalid @enderror"></textarea>
+          @error('body')
+            <small class="text-danger">{{ $message }}</small>
+          @enderror
         </div>
         <button type="submit" class="btn btn-primary">Create Post</button>
     </form>
