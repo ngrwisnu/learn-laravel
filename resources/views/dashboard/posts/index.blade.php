@@ -6,7 +6,7 @@
 </div>
 
 @if (session()->has('success'))
-<div class="alert alert-success d-flex justify-content-between" role="alert">
+<div class="alert alert-success d-flex justify-content-between col-lg-10" role="alert">
     {{ session('success') }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
@@ -31,8 +31,12 @@
                 <td>{{ $post->category->name }}</td>
                 <td>
                     <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info"><span data-feather="eye"></span></a>
-                    <a href="" class="badge bg-warning"><span data-feather="edit"></span></a>
-                    <a href="" class="badge bg-danger"><span data-feather="x"></span></a>
+                    <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
+                    <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-inline">
+                        @method('delete')
+                        @csrf
+                        <button class="badge bg-danger border-0" onclick="return confirm('Delete the post?')"><span data-feather="x"></span></button>
+                    </form>
                 </td>
             </tr>
             @endforeach
