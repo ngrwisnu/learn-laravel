@@ -6,7 +6,7 @@
 </div>
 
 <div class="col-lg-6">
-    <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="mb-5" autocomplete="on">
+    <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="mb-5" autocomplete="on" enctype="multipart/form-data">
         @method('put')
         @csrf
         <div class="mb-3">
@@ -36,6 +36,19 @@
           </select>
         </div>
         <div class="mb-3">
+          <label for="image" class="form-label">Choose Image</label>
+          <input type="hidden" name="oldImage" value="{{ $post->image }}">
+          @if ($post->image)
+          <img src="{{ asset('storage/' . $post->image) }}" class="img-preview img-fluid mb-3 col-sm-3 d-block">
+          @else
+          <img class="img-preview img-fluid mb-3 col-sm-3">
+          @endif
+          <input class="form-control @error('slug') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()">
+          @error('image')
+            <small class="invalid-feedback">{{ $message }}</small>
+          @enderror
+        </div>
+        <div class="mb-3">
           <label for="editor" class="form-label">Post Content</label>
           <textarea name="body" id="editor" cols="30" rows="10" class="@error('body') is-invalid @enderror">
             {{ $post->body }}
@@ -57,5 +70,19 @@
             .then(response => response.json())
             .then(data => slug.value = data.slug)
     });
+
+    function previewImage() {
+      const image = document.querySelector('#image');
+      const imagePreview = document.querySelector('.img-preview');
+
+      imagePreview.style.display = 'block';
+
+      const oFReader = new FileReader();
+      oFReader.readAsDataURL(image.files[0]);
+
+      oFReader.onload = function(oFREvent) {
+        imagePreview.src = oFREvent.target.result;
+      }
+    }
 </script>
 @endsection
